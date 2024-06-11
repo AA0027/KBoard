@@ -13,8 +13,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.db.name}?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
-    username: user326
-    password: 1234
+    username: ${rds.username}
+    password: ${rds.password}
 
   # security 설정
   security:
