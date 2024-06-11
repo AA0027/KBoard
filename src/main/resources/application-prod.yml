@@ -22,8 +22,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 250726105106-eejqg6e1onspid90put3cljem72e1t6r.apps.googleusercontent.com
-            client-secret: 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
+            client-id: aa
+            client-secret: aa
             scope:
               - email
               - profile
@@ -35,8 +35,8 @@ spring:
 #              - public-profile
 
           naver:
-            client-id: co_0JtJn0yc7Ke7tMZBp
-            client-secret: BbnwOzIuC5
+            client-id: aa
+            client-secret: aa
             scope:
               - name
               - email
@@ -71,7 +71,7 @@ app:
     password: 1234 # oauth2 인증한 회원에 대한 전용 패스워드, 보안주의!
     # Kakao 로그인 관련 세팅값
     kakao:
-      client-id: e21e60ce24280e249b5bc56bfca29143
+      client-id: aa
       redirect-uri: http://localhost:8080/oauth2/kakao/callback
       token-uri: https://kauth.kakao.com/oauth/token # access token 요청 URI
       user-info-uri: https://kapi.kakao.com/v2/user/me # 사용자 profile 요청 URI
