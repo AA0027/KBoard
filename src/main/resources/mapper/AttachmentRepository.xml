@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.AttachmentRepository">
+    <insert id="insert" parameterType="arraylist" flushCache="true">
+        INSERT INTO t5_attachment (post_id, sourcename, filename)
+        VALUES
+            <foreach collection="list" item="e" separator=",">
+                (#{e.sourcename}, #{e.filename}, #{param2})
+            </foreach>
+    </insert>
+
+    <insert id="save" flushCache="true" parameterType="com.lec.spring.domain.Attachment"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO  t5_attachment (sourcename, filename, post_id)
+        VALUE(#{sourcename}, #{filename}, #{post_id})
+    </insert>
+
+    <sql id="BASE_SELECT">
+        SELECT id, sourcename, filename, post_id FROM t5_attachment
+        WHERE 1=1
+    </sql>
+
+    <select id="findByPost" flushCache="true" parameterType="arraylist" resultType="com.lec.spring.domain.Attachment">
+        <include refid="BASE_SELECT"/>
+        AND post_id=#{post_id}
+    </select>
+
+    <select id="findById" flushCache="true" resultType="com.lec.spring.domain.Attachment">
+        <include refid="BASE_SELECT"/>
+        AND id=#{id}
+    </select>
+
+    <select id="findByIds" parameterType="arraylist" resultType="com.lec.spring.domain.Attachment" flushCache="true">
+        <include refid="BASE_SELECT"/>
+        AND id IN (
+        <foreach collection="ids" separator="," item="e">
+            #{e}
+        </foreach>)
+        ORDER BY id ASC
+    </select>
+
+    <delete id="deleteByIds" flushCache="true" parameterType="arraylist">
+        DELETE FROM t5_attachment
+        WHERE id IN (
+            <foreach collection="ids" item="e" separator=",">
+                #{e}
+            </foreach>
+
+            )
+
+    </delete>
+
+
+    <delete id="delete" flushCache="true" parameterType="com.lec.spring.domain.Attachment">
+        DELETE FROM t5_attachment
+        WHERE id=#{id}
+    </delete>
+</mapper>
